@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090d18">
+    <title>ServerWatch | Infrastructure Monitoring</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">S</div>
+                <div>
+                    <h2>ServerWatch</h2>
+                    <span>INFRASTRUCTURE CLOUD</span>
+                </div>
+            </div>
+
+            <div class="nav-label">WORKSPACE</div>
+
+            <nav class="navigation">
+                <a href="#dashboard" class="nav-link active">
+                    <span>◈</span> Overview
+                </a>
+                <a href="#monitoring" class="nav-link">
+                    <span>▥</span> Monitoring
+                </a>
+                <a href="#services" class="nav-link">
+                    <span>▦</span> Services
+                </a>
+                <a href="#alerts" class="nav-link">
+                    <span>♧</span> Alerts
+                </a>
+                <a href="#history" class="nav-link">
+                    <span>◷</span> History
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="system-card">
+                    <div class="system-indicator"></div>
+                    <div>
+                        <strong>System operational</strong>
+                        <span>All systems monitored</span>
+                    </div>
+                </div>
+                <div class="profile">
+                    <div class="avatar">SW</div>
+                    <div>
+                        <strong>Administrator</strong>
+                        <span>System Manager</span>
+                    </div>
+                    <span class="profile-menu">•••</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content" id="dashboard">
+
+            <header class="topbar">
+                <div>
+                    <div class="breadcrumb">Workspace / <strong>Overview</strong></div>
+                    <h1>Infrastructure Overview</h1>
+                    <p>Monitor your infrastructure performance in real time.</p>
+                </div>
+
+                <div class="top-actions">
+                    <span class="live-status">
+                        <span></span> LIVE MONITORING
+                    </span>
+                    <div class="date-display" id="current-date">Loading...</div>
+                </div>
+            </header>
+
+            <section class="welcome-banner">
+                <div>
+                    <span class="eyebrow">SERVERWATCH MONITORING</span>
+                    <h2>Your infrastructure, <span>under control.</span></h2>
+                    <p>Track performance, monitor services and detect anomalies before they become problems.</p>
+                </div>
+                <div class="banner-decoration">SW</div>
+            </section>
+
+            <section class="metrics-grid">
+
+                <article class="metric-card">
+                    <div class="metric-header">
+                        <span>CPU USAGE</span>
+                        <span class="metric-icon purple">⌘</span>
+                    </div>
+                    <div class="metric-value" id="cpu-value">--<small>%</small></div>
+                    <div class="progress-track">
+                        <div class="progress-fill purple-fill" id="cpu-bar"></div>
+                    </div>
+                    <div class="metric-footer">Processor utilization</div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-header">
+                        <span>MEMORY USAGE</span>
+                        <span class="metric-icon blue">▤</span>
+                    </div>
+                    <div class="metric-value" id="ram-value">--<small>%</small></div>
+                    <div class="progress-track">
+                        <div class="progress-fill blue-fill" id="ram-bar"></div>
+                    </div>
+                    <div class="metric-footer">RAM utilization</div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-header">
+                        <span>DISK USAGE</span>
+                        <span class="metric-icon cyan">▣</span>
+                    </div>
+                    <div class="metric-value" id="disk-value">--<small>%</small></div>
+                    <div class="progress-track">
+                        <div class="progress-fill cyan-fill" id="disk-bar"></div>
+                    </div>
+                    <div class="metric-footer">Storage utilization</div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-header">
+                        <span>SYSTEM UPTIME</span>
+                        <span class="metric-icon green">◷</span>
+                    </div>
+                    <div class="metric-value uptime-value" id="uptime-value">--</div>
+                    <div class="metric-footer">Application uptime</div>
+                </article>
+
+            </section>
+
+            <section class="content-grid" id="monitoring">
+
+                <article class="panel performance-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Performance analytics</h3>
+                            <p>Live resource utilization</p>
+                        </div>
+                        <span class="chart-tag">REAL-TIME</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </article>
+
+                <article class="panel system-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>System information</h3>
+                            <p>Host environment details</p>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <span>Hostname</span>
+                        <strong id="hostname">Loading...</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Operating system</span>
+                        <strong id="platform">Loading...</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>API status</span>
+                        <strong class="status-online">● Online</strong>
+                    </div>
+                    <div class="info-row">
+                        <span>Monitoring</span>
+                        <strong>Active</strong>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="panel services-panel" id="services">
+                <div class="panel-header">
+                    <div>
+                        <h3>Infrastructure services</h3>
+                        <p>Current application service status</p>
+                    </div>
+                </div>
+
+                <div class="service-row">
+                    <div class="service-icon">S</div>
+                    <div class="service-details">
+                        <strong>ServerWatch API</strong>
+                        <span>Backend monitoring service</span>
+                    </div>
+                    <span class="service-status"><i></i> Operational</span>
+                </div>
+
+            </section>
+
+            <footer class="footer">
+                <span>ServerWatch © 2026</span>
+                <span>Infrastructure monitoring platform</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
